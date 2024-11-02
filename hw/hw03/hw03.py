@@ -180,6 +180,15 @@ def count_dollars_upward(total):
     True
     """
     "*** YOUR CODE HERE ***"
+    def helper(total, bill = 1):
+        if total == 0:
+            return 1
+        if total < 0:
+            return 0
+        if bill == None:
+            return 0
+        return helper(total - bill, bill) + helper(total, next_larger_dollar(bill))
+    return helper(total)
 
 
 def print_move(origin, destination):
@@ -215,10 +224,18 @@ def move_stack(n, start, end):
     """
     assert 1 <= start <= 3 and 1 <= end <= 3 and start != end, "Bad start/end"
     "*** YOUR CODE HERE ***"
+    other = 6 - start - end
+    if n == 1:
+        print_move(start, end)
+        return
+    move_stack(n - 1, start, other)
+    move_stack(1, start, end)
+    move_stack(n - 1, other, end)
 
 
 from operator import sub, mul
 
+# stuck
 def make_anonymous_factorial():
     """Return the value of an expression that computes factorial.
 
@@ -230,5 +247,5 @@ def make_anonymous_factorial():
     ...     ['Assign', 'AnnAssign', 'AugAssign', 'NamedExpr', 'FunctionDef', 'Recursion'])
     True
     """
-    return 'YOUR_EXPRESSION_HERE'
+    return 1
 
