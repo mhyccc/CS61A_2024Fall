@@ -170,9 +170,9 @@ def memo_diff(diff_function):
         "*** YOUR CODE HERE ***"
         key = (typed, source)
         if key in cache:
-            result_value, limit_value = cache[key]
-            if limit <= limit_value:
-                return result_value
+            cache_result, cache_limit = cache[key]
+            if limit <= cache_limit :
+                return cache_result
 
         result = diff_function(typed, source, limit)
         cache[key] = (result, limit)
