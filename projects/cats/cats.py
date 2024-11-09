@@ -105,20 +105,27 @@ def accuracy(typed, source):
     print("DEBUG: ", typed_words)
     print("DEBUG: ", source_words)
     
-    right_cnt = 0
-    type_cnt = len(typed_words)
-    src_cnt = len(source_words)
+    # right_cnt = 0
+    # type_cnt = len(typed_words)
+    # src_cnt = len(source_words)
 
-    if type_cnt == 0 and src_cnt == 0:
-        return 100.0
-    elif type_cnt == 0:
-        return 0.0
-    for i in range(type_cnt):
-        if i == len(source_words):
-            break
-        if typed_words[i] == source_words[i]:
-            right_cnt += 1
-    return right_cnt * 100 / type_cnt
+    # if type_cnt == 0 and src_cnt == 0:
+    #     return 100.0
+    # elif type_cnt == 0:
+    #     return 0.0
+    # for i in range(type_cnt):
+    #     if i == len(source_words):
+    #         break
+    #     if typed_words[i] == source_words[i]:
+    #         right_cnt += 1
+    # return right_cnt * 100 / type_cnt
+
+
+    if not typed_words:
+        return 100.0 if not source_words else 0.0
+    
+    match_count = sum(1 for t, s in zip(typed_words, source_words) if t == s)
+    return match_count * 100 / len(typed_words)
     # END PROBLEM 3
 
 
