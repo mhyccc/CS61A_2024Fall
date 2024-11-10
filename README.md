@@ -39,3 +39,52 @@ If there are no fruits left and the total_amount is exactly 0, print the current
 这个打印结果也就是第三个参数，需要在递归调用中累加
 
 
+## HW04
+```python
+def max_path_sum(t):
+    """Return the maximum root-to-leaf path sum of a tree.
+    >>> t = tree(1, [tree(5, [tree(1), tree(3)]), tree(10)])
+    >>> max_path_sum(t) # 1, 10
+    11
+    >>> t2 = tree(5, [tree(4, [tree(1), tree(3)]), tree(2, [tree(10), tree(3)])])
+    >>> max_path_sum(t2) # 5, 2, 10
+    17
+    """
+    "*** YOUR CODE HERE ***"
+```
+
+最开始写的代码是
+```python
+    def helper(t, sum):
+        max_path = 0
+        if is_leaf(t):
+            return sum + label(t)
+        for b in branches(t):
+            cur_path = helper(b, sum + label(t))
+            print("DEBUG: ", cur_path, max_path)
+            max_path = max(max_path, cur_path)
+        return max_path
+    return helper(t, 0)
+```
+
+但是有点复杂，仔细想想这个函数的返回值是从根到叶节点的最大的label值和
+
+那么就从这里出发
+
+**base case**
+
+如果是叶子节点，自己同时又是根节点，那么最大值就是自己的label值
+
+**recusive case**
+
+如果不是叶子节点，那么按照通用的方法，把上面根节点排除掉
+
+结果应该是 `label(t) + max(....)`，排除掉的根节点下面的子节点肯定有自己的最大值，从中取最大即可
+
+代码如下
+```python
+    "*** ANOTHER METHOD ***"
+    if is_leaf(t):
+        return label(t)
+    return label(t) + max(max_path_sum(b) for b in branches(t))
+```
