@@ -88,3 +88,14 @@ def max_path_sum(t):
         return label(t)
     return label(t) + max(max_path_sum(b) for b in branches(t))
 ```
+
+
+## HW06
+
+Q4: Mutable Mapping
+第一次报错：tuple 没有 first属性
+原因是没有考虑到  `ans is Link.empty`的 base case
+
+Q5: Two List
+做不到统一，自己写的代码必须先将第一个值处理好后，才能用两层for循环完成后面的操作，后面看看solutions吧
+重要的是使用 cur指针（暂且叫这个名字吧）并且每次要更新cur指针.
