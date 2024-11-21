@@ -98,4 +98,22 @@ Q4: Mutable Mapping
 
 Q5: Two List
 做不到统一，自己写的代码必须先将第一个值处理好后，才能用两层for循环完成后面的操作，后面看看solutions吧
+
 重要的是使用 cur指针（暂且叫这个名字吧）并且每次要更新cur指针.
+
+
+## lab07
+Q3: FreeChecking
+以为不用重写，只需要插入需要的逻辑，但是根本没有那样的语法、机制
+
+
+Q5: Without One
+用的循环，面对这种链表题总是不知道 ans的初值设成什么，如果设成空 又会有`tuple object has no attibute rest / first`.
+
+TODO: 补上recusive写法
+
+Q6: Duplicate Link
+原本代码是这样更新cur的 `cur = cur.rest.rest` 
+
+但是下面还有一句更新代码 `cur = cur.rest`，很巧.
+
