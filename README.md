@@ -117,3 +117,41 @@ Q6: Duplicate Link
 
 但是下面还有一句更新代码 `cur = cur.rest`，很巧.
 
+
+## lab08
+Q4: Delete
+原本写的代码
+```python
+def delete(t, x):
+    """Remove all nodes labeled x below the root within Tree t. When a non-leaf
+    node is deleted, the deleted node's children become children of its parent.
+
+    The root node will never be removed.
+
+    >>> t = Tree(3, [Tree(2, [Tree(2), Tree(2)]), Tree(2), Tree(2, [Tree(2, [Tree(2), Tree(2)])])])
+    >>> delete(t, 2)
+    >>> t
+    Tree(3)
+    >>> t = Tree(1, [Tree(2, [Tree(4, [Tree(2)]), Tree(5)]), Tree(3, [Tree(6), Tree(2)]), Tree(4)])
+    >>> delete(t, 2)
+    >>> t
+    Tree(1, [Tree(4), Tree(5), Tree(3, [Tree(6)]), Tree(4)])
+    >>> t = Tree(1, [Tree(2, [Tree(4), Tree(5)]), Tree(3, [Tree(6), Tree(2)]), Tree(2, [Tree(6),  Tree(2), Tree(7), Tree(8)]), Tree(4)])
+    >>> delete(t, 2)
+    >>> t
+    Tree(1, [Tree(4), Tree(5), Tree(3, [Tree(6)]), Tree(6), Tree(7), Tree(8), Tree(4)])
+    """
+    new_branches = []
+    for b in t.branches:
+        # delete(b, x)
+        if b.label == x:
+            new_branches.extend(b.branches)
+            delete(b, x)
+        else:
+            new_branches.append(b)
+    t.branches = new_branches
+```
+搞错递归顺序了，不是从上到下，要从下到上依次把 `label == x` 的节点删掉（其实就是跳过）。
+
+所以在最开始就要执行递归也就是`delete(b, x)`。
+
