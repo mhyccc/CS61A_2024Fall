@@ -143,7 +143,7 @@ def delete(t, x):
     """
     new_branches = []
     for b in t.branches:
-        # delete(b, x)
+        # delete(b, x) 应该在这里执行递归
         if b.label == x:
             new_branches.extend(b.branches)
             delete(b, x)
@@ -152,6 +152,4 @@ def delete(t, x):
     t.branches = new_branches
 ```
 搞错递归顺序了，不是从上到下，要从下到上依次把 `label == x` 的节点删掉（其实就是跳过）。
-
-所以在最开始就要执行递归也就是`delete(b, x)`。
 
